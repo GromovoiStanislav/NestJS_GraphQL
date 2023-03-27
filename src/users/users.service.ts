@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { UserEntity } from "./entities/user.entity";
-import { Repository } from "typeorm";
+import { ObjectLiteral, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserInput } from "./inputs/create-user.input";
 import { UpdateUserInput } from "./inputs/update-user.input";
-import { PaginationArgs } from "./inputs/pagination-args.args";
+import { PaginationArgs } from "./inputs/pagination-args";
 
 @Injectable()
 export class UsersService {
@@ -23,8 +23,24 @@ export class UsersService {
   }
 
   async getAllUsers(paginationArgs: PaginationArgs): Promise<UserEntity[]> {
-    const { skip, take } = paginationArgs;
-    return this.userRepository.find({ skip, take });
+    const { skip, take, orderById, orderByName } = paginationArgs;
+
+
+    const order: ObjectLiteral = {};
+    if (orderById) {
+      order.id = orderById;
+    }
+    if (orderByName) {
+      order.name = orderByName;
+    }
+
+
+    return this.userRepository.find({
+      // @ts-ignore
+      order,
+      skip,
+      take
+    });
   }
 
   async removeUser(id: number): Promise<number> {

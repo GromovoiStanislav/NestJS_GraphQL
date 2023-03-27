@@ -24,7 +24,7 @@ query {
     id
     name
   }
-  getAllUsers(skip: 2, take: 10) {
+  getAllUsers(skip: 1, take: 10, orderByName: "asc") {
     id
     name
     email

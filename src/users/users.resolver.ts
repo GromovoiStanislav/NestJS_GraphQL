@@ -3,7 +3,7 @@ import { UsersService } from "./users.service";
 import { UserEntity } from "./entities/user.entity";
 import { CreateUserInput } from "./inputs/create-user.input";
 import { UpdateUserInput } from "./inputs/update-user.input";
-import { PaginationArgs } from "./inputs/pagination-args.args";
+import { PaginationArgs } from "./inputs/pagination-args";
 
 @Resolver()
 export class UsersResolver {
