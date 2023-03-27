@@ -16,13 +16,20 @@ mutation {
 }
 ```
 
-get all users and one user:
+get all users, pagination and one user:
 
 ```
 query {
   getAllUsers {
     id
     name
+  }
+  getAllUsers(skip: 2, take: 10) {
+    id
+    name
+    email
+    createdAt
+    updatedAt
   }
   getOneUser(id: 1) {
     id
@@ -33,6 +40,7 @@ query {
   }
 }
 ```
+
 
 update user:
 

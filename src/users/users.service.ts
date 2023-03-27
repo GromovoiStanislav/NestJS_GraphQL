@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserInput } from "./inputs/create-user.input";
 import { UpdateUserInput } from "./inputs/update-user.input";
+import { PaginationArgs } from "./inputs/pagination-args.args";
 
 @Injectable()
 export class UsersService {
@@ -21,8 +22,9 @@ export class UsersService {
     return this.userRepository.findOneBy({ id });
   }
 
-  async getAllUsers(): Promise<UserEntity[]> {
-    return this.userRepository.find();
+  async getAllUsers(paginationArgs: PaginationArgs): Promise<UserEntity[]> {
+    const { skip, take } = paginationArgs;
+    return this.userRepository.find({ skip, take });
   }
 
   async removeUser(id: number): Promise<number> {

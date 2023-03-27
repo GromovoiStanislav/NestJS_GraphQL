@@ -3,6 +3,7 @@ import { UsersService } from "./users.service";
 import { UserEntity } from "./entities/user.entity";
 import { CreateUserInput } from "./inputs/create-user.input";
 import { UpdateUserInput } from "./inputs/update-user.input";
+import { PaginationArgs } from "./inputs/pagination-args.args";
 
 @Resolver()
 export class UsersResolver {
@@ -31,8 +32,8 @@ export class UsersResolver {
   }
 
   @Query(() => [UserEntity])
-  async getAllUsers(): Promise<UserEntity[]> {
-    return this.userService.getAllUsers();
+  async getAllUsers(@Args() paginationArgs: PaginationArgs): Promise<UserEntity[]> {
+    return this.userService.getAllUsers(paginationArgs);
   }
 
 }
