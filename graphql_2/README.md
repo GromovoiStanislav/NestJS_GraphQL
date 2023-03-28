@@ -5,7 +5,9 @@ http://localhost:3000/graphql
 create User:
 ```
 mutation {
-  createUser(createUserData: { age: 27, email: "user@mail.ru" }) {
+  createUser(
+    createUserData: { age: 27, email: "user@mail.ru", password: "123" }
+  ) {
     userId
     age
     email

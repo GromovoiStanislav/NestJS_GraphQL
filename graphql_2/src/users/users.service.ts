@@ -6,11 +6,28 @@ import { CreateUserInput } from "./dto/create-user.input";
 import { randomUUID } from "node:crypto";
 import { UpdateUserInput } from "./dto/update-user.input";
 import { DeleteUserInput } from "./dto/delete-user.input";
+import { bcrypt_util } from "../auth/utils/bcrypt.util";
+
 
 @Injectable()
 export class UsersService {
 
-  private users: User[] = [];
+
+  private users: User[] = [
+    {
+      email: 'dan@example.com',
+      password: '$2b$12$bB2RxfOKn4hreTMpJQjFU.S0u7KfOe6tITLlv69uWcdRDWEk/X.0q',
+      userId: '123',
+      age: 20,
+    }
+  ];
+
+  async getUserByEmail(email: string): Promise<User> {
+    return this.users.find(user => user.email === email);
+  }
+  async getUserByid(id: string): Promise<User> {
+    return this.users.find(user => user.userId === id);
+  }
 
    async getUser(getUserArgs: GetUserArgs): Promise<User> {
     return this.users.find(user => user.userId === getUserArgs.userId);
@@ -23,7 +40,8 @@ export class UsersService {
   async createUser(createUserData: CreateUserInput): Promise<User> {
     const user: User = {
       userId: randomUUID(),
-      ...createUserData
+      ...createUserData,
+      password: await bcrypt_util.hashPassword(String(createUserData.password))
     }
     this.users.push(user);
     return user;
@@ -49,5 +67,6 @@ export class UsersService {
     this.users.splice(userIndex);
     return user;
   }
+
 
 }
