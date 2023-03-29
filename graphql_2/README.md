@@ -1,8 +1,13 @@
-## NestJS with GraphQL 
+## NestJS with GraphQL + Authentication with Passport.js
 
 http://localhost:3000/graphql
 
+```
+HTTP HEADERS: {"Authorization": "Bearer jwt-token"}
+```
+
 create User:
+
 ```
 mutation {
   createUser(
@@ -15,10 +20,12 @@ mutation {
   }
 }
 ```
+
 get some Users by ids:
+
 ```
 query {
-  users(userIds: ["5ddeb8ea-b72e-4474-bf15-f88c6b9a2aa6"]) {
+  users(userIds: ["5ddeb8ea-b72e-4474-bf15-f88c6b9a2aa6","123"]) {
     userId
     age
     email
@@ -26,7 +33,9 @@ query {
   }
 }
 ```
+
 get one User by id:
+
 ```
 query {
   user(userId: "5ddeb8ea-b72e-4474-bf15-f88c6b9a2aa6") {
@@ -37,7 +46,9 @@ query {
   }
 }
 ```
+
 update User:
+
 ```
 mutation {
   updateUser(
@@ -53,7 +64,9 @@ mutation {
   }
 }
 ```
+
 delete User:
+
 ```
 mutation {
   deleteUser(

@@ -6,34 +6,49 @@ import { GetUsersArgs } from "./dto/get-users.args";
 import { CreateUserInput } from "./dto/create-user.input";
 import { UpdateUserInput } from "./dto/update-user.input";
 import { DeleteUserInput } from "./dto/delete-user.input";
+import { ForbiddenException, UseGuards } from "@nestjs/common";
+import { GqlAuthGuard } from "../auth/guards/gql-auth.guard";
+import { CurrentUser } from "../auth/decorators/current-user.decorator";
 
 
 @Resolver()
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) {
+  }
 
-  @Query(() => User, { name: 'user', nullable: true })
+  @UseGuards(GqlAuthGuard)
+  @Query(() => User, { name: "user", nullable: true })
   async getUser(@Args() getUserArgs: GetUserArgs): Promise<User> {
     return this.usersService.getUser(getUserArgs);
   }
 
-  @Query(() => [User], { name: 'users', nullable: 'items' }) //itemsAndList
-  getUsers(@Args() getUsersArgs: GetUsersArgs): Promise<User[]> {
+  @UseGuards(GqlAuthGuard)
+  @Query(() => [User], { name: "users", nullable: "items" }) //itemsAndList
+  getUsers( @Args() getUsersArgs: GetUsersArgs): Promise<User[]> {
     return this.usersService.getUsers(getUsersArgs);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => User)
-  async createUser(@Args('createUserData') createUserData: CreateUserInput): Promise<User> {
+  async createUser(@Args("createUserData") createUserData: CreateUserInput): Promise<User> {
     return this.usersService.createUser(createUserData);
   }
 
-  @Mutation(() => User, {  nullable: true })
-  async updateUser(@Args('updateUserData') updateUserData: UpdateUserInput): Promise<User> {
-    return await this.usersService.updateUser(updateUserData)
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => User, { nullable: true })
+  async updateUser(@CurrentUser() user: User, @Args("updateUserData") updateUserData: UpdateUserInput): Promise<User> {
+    if (user.userId !== updateUserData.userId) {
+      throw new ForbiddenException();
+    }
+    return await this.usersService.updateUser(updateUserData);
   }
 
-  @Mutation(() => User, {  nullable: true })
-  async deleteUser(@Args('deleteUserData',) deleteUserData: DeleteUserInput): Promise<User> {
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => User, { nullable: true })
+  async deleteUser(@CurrentUser() user: User, @Args("deleteUserData") deleteUserData: DeleteUserInput): Promise<User> {
+    if (user.userId !== deleteUserData.userId) {
+      throw new ForbiddenException();
+    }
     return this.usersService.deleteUser(deleteUserData);
   }
 

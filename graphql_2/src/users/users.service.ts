@@ -16,7 +16,7 @@ export class UsersService {
   private users: User[] = [
     {
       email: 'dan@example.com',
-      password: '$2b$12$bB2RxfOKn4hreTMpJQjFU.S0u7KfOe6tITLlv69uWcdRDWEk/X.0q',
+      password: '$2b$12$bB2RxfOKn4hreTMpJQjFU.S0u7KfOe6tITLlv69uWcdRDWEk/X.0q',//"mypassword"
       userId: '123',
       age: 20,
     }
