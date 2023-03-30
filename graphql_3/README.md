@@ -40,6 +40,7 @@ mutation {
   }
 }
 ```
+
 update User:
 
 ```
@@ -50,6 +51,21 @@ mutation {
       age: 25
       favoriteFoods: ["beer"]
     }
+  ) {
+    userId
+    age
+    email
+    favoriteFoods
+  }
+}
+```
+
+delete User:
+
+```
+mutation {
+  deleteUser(
+    deleteUserData: { userId: "2fb05138-5299-4d97-8b20-fd8972cd6456" }
   ) {
     userId
     age

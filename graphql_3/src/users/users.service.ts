@@ -5,6 +5,7 @@ import { randomUUID } from "node:crypto";
 import { GetUserArgs } from "./dto/args/get-user-args.dto";
 import { CreateUserInput } from "./dto/input/create-user-input.dto";
 import { UpdateUserInput } from "./dto/input/update-user-input.dto";
+import { DeleteUserInput } from "./dto/input/delete-user-input.dto";
 
 @Injectable()
 export class UsersService {
@@ -29,5 +30,9 @@ export class UsersService {
 
     async updateUser(updateUserData: UpdateUserInput): Promise<User> {
         return this.usersRepository.findOneAndUpdate({ userId: updateUserData.userId }, updateUserData);
+    }
+
+    async deleteUser(deleteUserData: DeleteUserInput): Promise<User> {
+        return this.usersRepository.findOneAndDelete({ userId: deleteUserData.userId });
     }
 }
