@@ -1,4 +1,5 @@
-import { User } from "../../src/users/schemas/user.schema";
+import { User } from "../../../src/users/schemas/user.schema";
+
 
 export const userStub = (): User => {
   return {

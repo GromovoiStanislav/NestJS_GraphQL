@@ -3,9 +3,9 @@ import { Connection } from "mongoose"
 import * as request from 'supertest';
 
 import { userStub } from "./stubs/user.stub";
-import { CreateUserRequest } from "../src/users/dto/request/create-user-request.dto";
-import { AppModule } from "../src/app.module";
-import { DatabaseService } from "../src/database/database.service";
+import { CreateUserRequest } from "../../src/users/dto/request/create-user-request.dto";
+import { AppModule } from "../../src/app.module";
+import { DatabaseService } from "../../src/database/database.service";
 
 
 describe('UsersController', () => {
