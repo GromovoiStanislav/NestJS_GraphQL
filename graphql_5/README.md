@@ -1,4 +1,4 @@
-## NestJS Schema First GraphQL Server and Authorization
+## NestJS Schema First GraphQL Server, Observable and Authorization
 
 http://localhost:3000/graphql
 
