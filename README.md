@@ -6,4 +6,4 @@
 - graphql_4 - Schema first demo
 - graphql_5 - Schema first, Observable, Authentication
 - graphql_6 - Code first, TypeORM
-- graphql_7 - Code first, Authentication (passport-local, passport-jwt), graphql-request
+- graphql_7 - Code first, TypeORM, Authentication (passport-local, passport-jwt), graphql-request

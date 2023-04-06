@@ -6,6 +6,7 @@ import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
   imports: [
@@ -13,6 +14,12 @@ import { AppService } from "./app.service";
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
       sortSchema: true
+    }),
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: ':memory:',
+      autoLoadEntities:true,
+      synchronize: true,
     }),
     UsersModule,
     AuthModule
