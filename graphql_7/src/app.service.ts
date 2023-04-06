@@ -8,8 +8,14 @@ export class AppService {
   private readonly graphQLClient: GraphQLClient;
 
   constructor() {
-    const url = "http://localhost:3000/graphql"; // replace with your GraphQL server URL
-    this.graphQLClient = new GraphQLClient(url);
+    const url = "http://localhost:3000/graphql"; // replace with your target GraphQL server URL
+    const JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcml1cyIsInN1YiI6MSwiaWF0IjoxNjgwNzUzNzI2LCJleHAiOjE2ODA3NTQ2MjZ9.q3CLWigDDC9r9gY4Y4phHOSwJTNUHOr7JWormafZEOM";
+    this.graphQLClient = new GraphQLClient(url, {
+      headers: {
+        Authorization: `Bearer ${JWT}`
+      }
+    });
+
   }
 
 
@@ -18,7 +24,7 @@ export class AppService {
   }
 
 
-  getUsers(token: string) {
+  getUsers() {
     const query = `
       query {
         users {
@@ -28,15 +34,11 @@ export class AppService {
       }
     `;
 
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    return this.graphQLClient.request(query, { headers });
+    return this.graphQLClient.request(query);
   }
 
 
-  getUser(username: string, token: string) {
+  getUser(username: string) {
     const query = `
       query {
         user(username: "${username}") {
@@ -46,11 +48,7 @@ export class AppService {
       }
     `;
 
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    return this.graphQLClient.request(query, { headers });
+    return this.graphQLClient.request(query);
   }
 
 
@@ -70,22 +68,18 @@ export class AppService {
   }
 
 
-  async createUser(name: string, password: string, token: string) {
+  async signup(name: string, password: string) {
 
     const mutation = `
       mutation {
-        createUser(createUserInput: { name: "${name}", password: "${password}" }) {
+        signup(loginInput: { name: "${name}", password: "${password}" }) {
           id
           name
         }
       }
     `;
 
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-
-    return this.graphQLClient.request(mutation, { headers });
+    return this.graphQLClient.request(mutation);
   }
 }
 

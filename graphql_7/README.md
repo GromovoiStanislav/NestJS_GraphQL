@@ -1,4 +1,4 @@
-## NestJS with GraphQL Code first, Authentication, GraphQLClient
+## NestJS with GraphQL Code first, Authentication (passport-local, passport-jwt), graphql-request
 
 http://localhost:3000/graphql
 

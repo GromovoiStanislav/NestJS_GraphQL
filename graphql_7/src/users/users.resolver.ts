@@ -11,12 +11,6 @@ export class UsersResolver {
   constructor(private readonly usersService: UsersService) {
   }
 
-  @Mutation(() => User)
-  @UseGuards(JwtAuthGuard)
-  async createUser(@Args("createUserInput") createUserInput: CreateUserInput): Promise<User> {
-    return this.usersService.create(createUserInput);
-  }
-
 
   @Query(() => [User], { name: "users" })
   @UseGuards(JwtAuthGuard)

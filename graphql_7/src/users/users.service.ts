@@ -7,8 +7,8 @@ import { User } from "./entities/user.entity";
 export class UsersService {
 
   private readonly users: User[] = [
-    { id: 1, name: "marius", password: "123" },
-    { id: 2, name: "maria", password: "123" }
+    { id: 1, name: "marius", password: "$2b$10$Lntrrl0H4uL8vnVdgXkMy.8SEA6EKSfx5DQy.f4Lzq4HQ.6GUgZqu" }, // password: "123"
+    { id: 2, name: "maria", password: "$2b$10$Lntrrl0H4uL8vnVdgXkMy.8SEA6EKSfx5DQy.f4Lzq4HQ.6GUgZqu" } // password: "123"
   ];
 
   async create(createUserInput: CreateUserInput): Promise<User> {
@@ -17,7 +17,6 @@ export class UsersService {
       id: this.users.length + 1
     };
     this.users.push(user);
-
     return user;
   }
 

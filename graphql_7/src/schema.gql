@@ -2,11 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreateUserInput {
-  name: String!
-  password: String!
-}
-
 input LoginInput {
   name: String!
   password: String!
@@ -18,7 +13,6 @@ type LoginResponse {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
   login(loginInput: LoginInput!): LoginResponse!
   signup(loginInput: LoginInput!): User!
 }
