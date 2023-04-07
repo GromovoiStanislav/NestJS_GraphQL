@@ -20,6 +20,28 @@ query GetStuff {
   }
 }
 
+query GetStudentById {
+  getStudentById(id: 1) {
+    id
+    name
+    age
+    email
+    createdAt
+    updatedAt
+  }
+}
+
+query GetStudentByEmail {
+  getStudentByEmail(email: "tom@mail.ru") {
+    id
+    name
+    age
+    email
+    createdAt
+    updatedAt
+  }
+}
+
 mutation CreateStudent {
   createStudent(
     createStudentInput: { name: "Tom", age: 25, email: "tom@mail.ru" }
@@ -32,6 +54,5 @@ mutation CreateStudent {
     updatedAt
   }
 }
-
 ```
 
