@@ -2,6 +2,7 @@ import {Args, Int, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {StudentService} from "./student.service";
 import {Student} from "./student.entity";
 import {CreateStudentInput} from "./create-student.input";
+import {UpdateStudentInput} from "./update-student.input";
 
 @Resolver(() => Student)
 export class StudentResolver {
@@ -27,5 +28,15 @@ export class StudentResolver {
     @Mutation(() => Student)
     async createStudent(@Args('createStudentInput') createStudentInput: CreateStudentInput) {
         return this.studentService.create(createStudentInput);
+    }
+
+    @Mutation(() => Student, {nullable: true})
+    async updateStudent(@Args('updateStudentInput') updateStudentInput: UpdateStudentInput) {
+        return this.studentService.update(updateStudentInput);
+    }
+
+    @Mutation(() => String , {nullable: true})
+    async removeStudent(@Args('id',{ type: () => Int })id: number) {
+        return this.studentService.remove(id);
     }
 }

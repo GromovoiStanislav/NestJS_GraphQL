@@ -54,5 +54,20 @@ mutation CreateStudent {
     updatedAt
   }
 }
+
+mutation UpdateStudent {
+  updateStudent(updateStudentInput: { id: 9, age: 26 }) {
+    id
+    name
+    age
+    email
+    createdAt
+    updatedAt
+  }
+}
+
+mutation RemoveStudent {
+  removeStudent(id: 4)
+}
 ```
 
