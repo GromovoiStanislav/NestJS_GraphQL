@@ -4,6 +4,7 @@ import { ConfirmUserInput, CreateUserInput, LoginInput, User } from "./user.sche
 import Ctx from "../types/context.type";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "./gql-auth.guard";
+import { CurrentUser } from "./current-user.decorator";
 
 
 @Resolver(() => User)
@@ -24,14 +25,18 @@ export class UserResolver {
 
   @Query(() => User, { nullable: true })
   async login(@Args("input") input: LoginInput, @Context() context: Ctx) {
-    return this.userService.login(input, context);
+    return this.userService.login(input, context.res);
   }
 
   @Query(() => User, { nullable: true })
   @UseGuards(GqlAuthGuard)
-  async me(@Context() context: Ctx) {
-    return context.req.user;
+  async me(@CurrentUser() user: User) {
+    return user;
   }
+  // async me(@Context() context: Ctx) {
+  //   return context.req.user;
+  // }
+
 
   @Query(() => User, { nullable: true })
   @UseGuards(GqlAuthGuard)

@@ -3,7 +3,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { ConfirmUserInput, CreateUserInput, LoginInput, User, UserDocument } from "./user.schema";
 import { nanoid } from "nanoid/async";
-import Ctx from "../types/context.type";
 import { signJwt } from "../utils/jwt.utils";
 import { omit } from "lodash";
 import { CookieOptions } from "express";
@@ -44,7 +43,7 @@ export class UserService {
   }
 
 
-  async login({ email, password }: LoginInput, context: Ctx) {
+  async login({ email, password }: LoginInput, res: Response) {
     // Find our user
     const user = await this.userModel
       .findOne({ email })
@@ -61,7 +60,7 @@ export class UserService {
     const jwt = signJwt(omit(user.toJSON(), ["password", "active"]));
 
     // Set the JWT in a cookie
-    context.res.cookie("token", jwt, cookieOptions);
+    res.cookie("token", jwt, cookieOptions);
 
     // return the user
     return user;
