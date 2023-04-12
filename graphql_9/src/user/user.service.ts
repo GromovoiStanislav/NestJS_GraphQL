@@ -7,6 +7,7 @@ import Ctx from "../types/context.type";
 import { signJwt } from "../utils/jwt.utils";
 import { omit } from "lodash";
 import { CookieOptions } from "express";
+import {  Response } from 'express';
 
 
 const cookieOptions: CookieOptions = {
@@ -66,9 +67,9 @@ export class UserService {
     return user;
   }
 
-  async logout(context: Ctx) {
-    context.res.cookie('token', '', { ...cookieOptions, maxAge: 0 });
-    //context.res.clearCookie('token')
+  async logout(res: Response) {
+    res.cookie('token', '', { ...cookieOptions, maxAge: 0 });
+    //res.clearCookie('token')
     //return null;
   }
 

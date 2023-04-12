@@ -20,19 +20,18 @@ import { decode } from "./utils/jwt.utils";
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
       context: ({ req, res }) => {
-        // Get the cookie from request
-        const token = get(req, "cookies.token");
-
-        console.log({ token });
-
-        // Verify the cookie
-        const user = token ? decode(token) : null;
-
-        // Attach the user object to the request object
-        if (user) {
-          set(req, 'user', user);
-        }
-
+      //   // Get the cookie from request
+      //   const token = get(req, "cookies.token");//
+      //   console.log({ token });
+      //
+      //   // Verify the cookie
+      //   const user = token ? decode(token) : null;
+      //
+      //   // Attach the user object to the request object
+      //   if (user) {
+      //     set(req, 'user', user);
+      //   }
+      //
         return { req, res };
       }
     }),

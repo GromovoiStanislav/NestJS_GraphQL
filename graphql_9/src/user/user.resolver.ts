@@ -2,6 +2,8 @@ import { Resolver, Query, Mutation, Args, Context } from "@nestjs/graphql";
 import { UserService } from "./user.service";
 import { ConfirmUserInput, CreateUserInput, LoginInput, User } from "./user.schema";
 import Ctx from "../types/context.type";
+import { UseGuards } from "@nestjs/common";
+import { GqlAuthGuard } from "./gql-auth.guard";
 
 
 @Resolver(() => User)
@@ -26,13 +28,15 @@ export class UserResolver {
   }
 
   @Query(() => User, { nullable: true })
+  @UseGuards(GqlAuthGuard)
   async me(@Context() context: Ctx) {
     return context.req.user;
   }
 
   @Query(() => User, { nullable: true })
+  @UseGuards(GqlAuthGuard)
   async logout(@Context() context: Ctx) {
-    await this.userService.logout(context);
+    await this.userService.logout(context.res);
     return context.req.user;
   }
 
