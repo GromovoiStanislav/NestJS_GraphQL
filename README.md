@@ -9,3 +9,4 @@
 - graphql_7 - Code first, TypeORM, Authentication (passport-local, passport-jwt), graphql-request
 - graphql_8 - Code first, MikroORM
 - graphql_9 - Code first with MongoDB and Authentication (cookie)
+- graphql_10 - Code-first with TypeORM - official course

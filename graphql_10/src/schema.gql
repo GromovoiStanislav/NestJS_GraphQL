@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+interface Drink {
+  name: String!
+}
+
+"""Coffee flavors"""
+type Flavor {
+  """A unique identifier"""
+  id: Int!
+  name: String!
+  coffees: [Coffee!]!
+}
+
+"""Coffee model"""
+type Coffee implements Drink {
+  name: String!
+
+  """A unique identifier"""
+  id: Int!
+  brand: String!
+  flavors: [Flavor!]!
+  createdAt: Date!
+}
+
+"""Tea model"""
+type Tea implements Drink {
+  name: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  drinks: [Drink!]!
+  coffees: [Coffee!]!
+  coffee(id: Int!): Coffee!
+}
+
+type Mutation {
+  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!
+  updateCoffee(id: Int!, updateCoffeeInput: UpdateCoffeeInput!): Coffee!
+  removeCoffee(id: Int!): Coffee!
+}
+
+"""Create coffee input type"""
+input CreateCoffeeInput {
+  """A new coffee name"""
+  name: String!
+  brand: String!
+  flavors: [String!]!
+}
+
+"""Update coffee input type"""
+input UpdateCoffeeInput {
+  """A new coffee name"""
+  name: String
+  brand: String
+  flavors: [String!]
+}
