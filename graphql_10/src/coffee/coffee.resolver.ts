@@ -1,14 +1,28 @@
-import { Resolver, Query, Mutation, Args, ID, Int } from "@nestjs/graphql";
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  Subscription,
+} from "@nestjs/graphql";
 import { CoffeeService } from "./coffee.service";
 import { Coffee } from "./entities/coffee.entity";
 import { CreateCoffeeInput } from "./dto/create-coffee.input";
 import { UpdateCoffeeInput } from "./dto/update-coffee.input";
-import { ParseIntPipe } from "@nestjs/common";
+import { ParseIntPipe, UseFilters } from "@nestjs/common";
+import { PubSub } from "graphql-subscriptions";
+import { UserInputErrorExceptionFilter } from "../common/exceptions/http-exception.filter";
 
+
+@UseFilters(new UserInputErrorExceptionFilter())
 @Resolver(() => Coffee)
 export class CoffeeResolver {
 
-  constructor(private readonly coffeeService: CoffeeService) {
+  constructor(
+    private readonly coffeeService: CoffeeService,
+    private pubSub: PubSub
+  ) {
   }
 
   @Query(() => [Coffee], { name: "coffees" })
@@ -37,6 +51,11 @@ export class CoffeeResolver {
   @Mutation(() => Coffee, { name: "removeCoffee" })
   remove(@Args("id", { type: () => Int }, ParseIntPipe) id: number) {
     return this.coffeeService.remove(id);
+  }
+
+  @Subscription(() => Coffee)
+  coffeeAdded() {
+    return this.pubSub.asyncIterator("coffeeAdded");
   }
 
 }
