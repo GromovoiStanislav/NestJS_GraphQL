@@ -23,6 +23,12 @@ type Coffee implements Drink {
   brand: String!
   flavors: [Flavor!]!
   createdAt: Date!
+  type: CoffeeType!
+}
+
+enum CoffeeType {
+  ARABICA
+  ROBUSTA
 }
 
 """Tea model"""
@@ -34,10 +40,13 @@ type Tea implements Drink {
 scalar Date
 
 type Query {
+  drinks2: [DrinksResul!]!
   drinks: [Drink!]!
   coffees: [Coffee!]!
   coffee(id: Int!): Coffee!
 }
+
+union DrinksResul = Coffee | Tea
 
 type Mutation {
   createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!
@@ -51,6 +60,7 @@ input CreateCoffeeInput {
   name: String!
   brand: String!
   flavors: [String!]!
+  type: CoffeeType!
 }
 
 """Update coffee input type"""
@@ -59,4 +69,9 @@ input UpdateCoffeeInput {
   name: String
   brand: String
   flavors: [String!]
+  type: CoffeeType
+}
+
+type Subscription {
+  coffeeAdded: Coffee!
 }

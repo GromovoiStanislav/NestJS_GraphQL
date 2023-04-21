@@ -6,6 +6,7 @@ query Coffees {
     id
     name
     brand
+    type
     flavors {
       id
       name
@@ -19,6 +20,7 @@ query Coffee($coffeeId: Int!) {
     id
     name
     brand
+    type
     flavors {
       id
       name
@@ -37,17 +39,40 @@ query Drinks {
   }
 }
 
+query Drinks2 {
+  drinks2 {
+    ... on Tea {
+      name
+    }
+    ... on Coffee {
+      id
+      brand
+      name
+    }
+  }
+}
+
+query CoffeeTypes {
+  __type(name: "CoffeeType") {
+    enumValues {
+      name
+    }
+  }
+}
+
 mutation CreateCoffee {
   createCoffee(
     createCoffeeInput: {
       name: "Poast"
       brand: "Buddybrew"
+      type: ARABICA
       flavors: ["vanilla", "chocolate"]
     }
   ) {
     id
     name
     brand
+    type
     flavors {
       id
       name
@@ -61,6 +86,7 @@ mutation UpdateCoffee {
     id
     name
     brand
+    type
     flavors {
       id
       name
@@ -78,10 +104,22 @@ mutation RemoveCoffee {
     }
   }
 }
+
 ```
 
 ```
 {
 	"coffeeId": 1
+}
+```
+
+```
+subscription{
+  coffeeAdded{
+    id
+    name
+    brand
+    type
+  }
 }
 ```
