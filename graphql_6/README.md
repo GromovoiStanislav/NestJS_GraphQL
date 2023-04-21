@@ -1,4 +1,4 @@
-## NestJS GraphQL Code first
+## NestJS GraphQL Code first with DataLoader, TypeORM
 
 http://localhost:3000/graphql
 
