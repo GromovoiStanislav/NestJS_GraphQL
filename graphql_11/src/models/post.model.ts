@@ -10,5 +10,4 @@ export class Post {
 
   @Field(type => Int)
   authorId: number;
-
 }

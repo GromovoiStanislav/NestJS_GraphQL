@@ -10,3 +10,4 @@
 - graphql_8 - Code first, MikroORM
 - graphql_9 - Code first with MongoDB and Authentication (cookie)
 - graphql_10 - Code-first with TypeORM - official course
+- graphql_11 - Code first - multilevel @ResolveField example (+voyager)

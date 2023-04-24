@@ -1,19 +1,18 @@
 import { Parent, ResolveField, Resolver } from "@nestjs/graphql";
-import { Author } from "../models/author.model";
-
-import { PostsService } from "../services/posts.service";
 import { Post } from "../models/post.model";
+import { CommentsService } from "../services/comments.service";
+import { Comment } from "../models/comment.model";
 
-@Resolver(() => Author)
-export class AuthorPostsResolver {
+@Resolver(() => Post)
+export class PostCommentsResolver {
   constructor(
-    private postsService: PostsService
+    private commentsService: CommentsService
   ) {
   }
 
-  @ResolveField(() => [Post])
-  async posts(@Parent() author: Author) {
-    const { id } = author;
-    return this.postsService.findAllByAuthor(id);
+  @ResolveField(() => [Comment])
+  async comments(@Parent() post: Post) {
+    const { id } = post;
+    return this.commentsService.findAllByPost(id);
   }
 }

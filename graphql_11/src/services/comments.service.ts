@@ -1,14 +1,18 @@
 import { Injectable } from "@nestjs/common";
+import { Comment } from "../models/comment.model";
 
 @Injectable()
-export class PostsService {
+export class CommentsService {
 
-  findAllByAuthor( authorId: number ) {
-     return [
-      { id: 1, title: "Title 1", authorId: 1 },
-      { id: 2, title: "Title 2", authorId: 1 },
-      { id: 3, title: "Title 3", authorId: 1 },
-      { id: 4, title: "Title 4", authorId: 1 },
-    ];
+  data: Comment[] = [
+    { id: 1, text: "Comment 1", postId: 1 },
+    { id: 2, text: "Comment 2", postId: 2 },
+    { id: 3, text: "Comment 3", postId: 3 },
+    { id: 4, text: "Comment 4", postId: 3 }
+  ];
+
+  findAllByPost(postId: number) {
+    return this.data.filter(post => post.postId === postId);
   }
+
 }
