@@ -41,8 +41,10 @@ class UserCreateInput {
 
 @Resolver(User)
 export class UserResolver {
+
   constructor(@Inject(PrismaService) private prismaService: PrismaService) {
   }
+
 
   @ResolveField()
   async posts(@Root() user: User, @Context() ctx): Promise<Post[]> {
@@ -54,6 +56,7 @@ export class UserResolver {
       })
       .posts();
   }
+
 
   @Mutation(() => User)
   async signupUser(
@@ -75,10 +78,12 @@ export class UserResolver {
     });
   }
 
+
   @Query(() => [User], { nullable: true })
   async allUsers(@Context() ctx) {
     return this.prismaService.user.findMany();
   }
+
 
   @Query(() => [Post], { nullable: true })
   async draftsByUser(
@@ -97,4 +102,5 @@ export class UserResolver {
         }
       });
   }
+
 }

@@ -6,7 +6,6 @@ import {
   ResolveField,
   Root,
   Context,
-  Int,
   InputType,
   Field,
   registerEnumType
@@ -39,6 +38,7 @@ enum SortOrder {
   desc = "desc",
 }
 
+
 registerEnumType(SortOrder, {
   name: "SortOrder"
 });
@@ -46,8 +46,10 @@ registerEnumType(SortOrder, {
 
 @Resolver(Post)
 export class PostResolver {
+
   constructor(@Inject(PrismaService) private prismaService: PrismaService) {
   }
+
 
   @ResolveField()
   async author(@Root() post: Post): Promise<User | null> {
@@ -60,12 +62,14 @@ export class PostResolver {
       .author();
   }
 
+
   @Query(() => Post, { nullable: true })
   async postById(@Args("id") id: number) {
     return this.prismaService.post.findUnique({
       where: { id }
     });
   }
+
 
   @Query(() => [Post])
   async feed(
@@ -95,6 +99,7 @@ export class PostResolver {
     });
   }
 
+
   @Mutation(() => Post)
   async createDraft(
     @Args("data") data: PostCreateInput,
@@ -112,13 +117,14 @@ export class PostResolver {
     });
   }
 
+
   @Mutation(() => Post, { nullable: true })
   async incrementPostViewCount(@Args("id") id: number): Promise<Post> {
     const post = await this.prismaService.post.findUnique({
-      where: { id: id  }
+      where: { id: id }
     });
 
-    if(!post) return null
+    if (!post) return null;
 
     return this.prismaService.post.update({
       where: { id },
@@ -130,22 +136,24 @@ export class PostResolver {
     });
   }
 
+
   @Mutation(() => Post, { nullable: true })
   async togglePublishPost(@Args("id") id: number): Promise<Post | null> {
     const post = await this.prismaService.post.findUnique({
-      where: { id: id  },
+      where: { id: id },
       select: {
         published: true
       }
     });
 
-    if(!post) return null
+    if (!post) return null;
 
     return this.prismaService.post.update({
-      where: { id: id  },
+      where: { id: id },
       data: { published: !post?.published }
     });
   }
+
 
   @Mutation(() => Post, { nullable: true })
   async deletePost(
@@ -156,4 +164,5 @@ export class PostResolver {
       where: { id }
     });
   }
+
 }

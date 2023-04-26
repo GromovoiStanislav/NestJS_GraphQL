@@ -10,6 +10,8 @@ npx prisma migrate dev --name init
 
 http://localhost:3000/graphql
 
+<details><summary><strong>See more API operations</strong></summary>
+
 Get all published posts and their authors:
 
 ```
@@ -29,7 +31,36 @@ query feed {
 }
 ```
 
-Create a new user
+Search for posts that contain a specific string in their title or content:
+
+```
+# Search for posts that contain a specific string in their title or content
+query feedSearchString {
+  feed(searchString: "prisma") {
+    id
+    title
+    content
+    published
+  }
+}
+```
+
+Paginate and order the returned posts:
+
+```
+# Paginate and order the returned posts
+query feedPaginate {
+  feed(skip: 2, take: 2, orderBy: { updatedAt: desc }) {
+    id
+    updatedAt
+    title
+    content
+    published
+  }
+}
+```
+
+Create a new user:
 
 ```
 #Create a new user
@@ -40,7 +71,7 @@ mutation signupUser {
 }
 ```
 
-Get the drafts of a user
+Get the drafts of a user:
 
 ```
 # Get the drafts of a user
@@ -59,7 +90,7 @@ query draftsByUser {
 }
 ```
 
-Get all users
+Get all users:
 
 ```
 # Get all users
@@ -81,7 +112,7 @@ query allUsers {
 }
 ```
 
-Create a new draft
+Create a new draft:
 
 ```
 # Create a new draft
@@ -101,7 +132,7 @@ mutation createDraft {
 }
 ```
 
-Publish/unpublish an existing post
+Publish/unpublish an existing post:
 
 ```
 # Publish/unpublish an existing post
@@ -113,7 +144,7 @@ mutation togglePublishPost {
 }
 ```
 
-Increment the view count of a post
+Increment the view count of a post:
 
 ```
 # Increment the view count of a post
@@ -125,7 +156,7 @@ mutation incrementPostViewCount {
 }
 ```
 
-Get a single post
+Get a single post:
 
 ```
 # Get a single post
@@ -143,7 +174,7 @@ query postById {
 }
 ```
 
-Delete a post
+Delete a post:
 
 ```
 # Delete a post
@@ -153,3 +184,5 @@ mutation deletePost {
   }
 }
 ```
+
+</details>
