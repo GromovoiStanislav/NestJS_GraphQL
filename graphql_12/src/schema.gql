@@ -2,11 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Profile {
+  id: Int!
+  bio: String!
+  user: User!
+  userId: Int!
+}
+
 type User {
   id: Int!
   email: String!
   name: String
   posts: [Post!]
+  profile: Profile
 }
 
 type Post {
@@ -48,19 +56,31 @@ enum SortOrder {
 
 type Mutation {
   signupUser(data: UserCreateInput!): User!
+  updateProfileByUser(userUniqueInput: UserUniqueInput!, profile: ProfileCreateInput!): User!
   createDraft(data: PostCreateInput!, authorEmail: String!): Post!
   incrementPostViewCount(id: Float!): Post
   togglePublishPost(id: Float!): Post
   deletePost(id: Float!): Post
+  createNewProfile(userUniqueInput: UserUniqueInput!, profile: ProfileCreateUpdateInput!): Profile!
+  updateProfileByUserId(userId: Int!, profile: ProfileCreateUpdateInput!): Profile!
 }
 
 input UserCreateInput {
   email: String!
   name: String
   posts: [PostCreateInput!]
+  profile: ProfileCreateInput
 }
 
 input PostCreateInput {
   title: String!
   content: String
+}
+
+input ProfileCreateInput {
+  bio: String!
+}
+
+input ProfileCreateUpdateInput {
+  bio: String!
 }

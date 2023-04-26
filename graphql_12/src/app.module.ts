@@ -6,6 +6,7 @@ import { join } from "node:path";
 import { PrismaService } from "./prisma.service";
 import { PostResolver } from "./resolvers.post";
 import { UserResolver } from "./resolvers.user";
+import { ProfileResolver } from "./resolvers.profile";
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { UserResolver } from "./resolvers.user";
     })
   ],
   controllers: [AppController],
-  providers: [PrismaService, UserResolver, PostResolver]
+  providers: [PrismaService, UserResolver, PostResolver, ProfileResolver]
 })
 export class AppModule {
 }

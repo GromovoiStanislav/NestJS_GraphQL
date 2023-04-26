@@ -13,6 +13,14 @@ model User {
   email String  @unique
   name  String?
   posts Post[]
+  profile Profile?
+}
+
+model Profile {
+  id     Int     @default(autoincrement()) @id
+  bio    String
+  userId Int     @unique
+  user   User    @relation(fields: [userId], references: [id])
 }
 
 model Post {

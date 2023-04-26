@@ -71,6 +71,71 @@ mutation signupUser {
 }
 ```
 
+Create a new user with profile:
+
+```
+# Create a new user with profile
+mutation signupUser {
+  signupUser(
+    data: {
+      name: "Sam"
+      email: "sam@prisma.io"
+      profile: { bio: "Hello World" }
+    }
+  ) {
+    id
+    profile {
+      id
+    }
+  }
+}
+```
+
+Create a new profile for an existing user:
+
+```
+# Create a new profile for an existing user
+mutation createNewProfile {
+  createNewProfile(
+    userUniqueInput: { id: 1 }
+    profile: { bio: "Hello World" }
+  ) {
+    id
+    bio
+  }
+}
+```
+
+Update the profile of an existing user:
+
+```
+# Update the profile of an existing user
+mutation updateProfileByUser {
+  updateProfileByUser(userUniqueInput: { id: 6 }, profile: { bio: "bio..." }) {
+    id
+    name
+    email
+    profile {
+      id
+      bio
+    }
+  }
+}
+
+```
+
+Update the profile by userId:
+
+```
+# Update the profile by userId
+mutation updateProfileByUserId {
+  updateProfileByUserId(userId: 6, profile: { bio: "Hello Prisma" }) {
+    id
+    bio
+  }
+}
+```
+
 Get the drafts of a user:
 
 ```
@@ -99,6 +164,11 @@ query allUsers {
     id
     name
     email
+    profile {
+      id
+      bio
+      userId
+    }
     posts {
       id
       title

@@ -14,15 +14,24 @@ import { Post } from "./post";
 import { User } from "./user";
 import { PrismaService } from "./prisma.service";
 import { PostCreateInput } from "./resolvers.post";
+import { Profile } from "./profile";
+
 
 
 @InputType()
-class UserUniqueInput {
+export class UserUniqueInput {
   @Field({ nullable: true })
   id: number;
 
   @Field({ nullable: true })
   email: string;
+}
+
+
+@InputType()
+class ProfileCreateInput {
+  @Field()
+  bio: string;
 }
 
 
@@ -34,9 +43,14 @@ class UserCreateInput {
   @Field({ nullable: true })
   name: string;
 
-  @Field((type) => [PostCreateInput], { nullable: true })
-  posts: [PostCreateInput];
+  @Field(() => [PostCreateInput], { nullable: true })
+  posts?: [PostCreateInput];
+
+  @Field(() => ProfileCreateInput, { nullable: true })
+  profile?: ProfileCreateInput;
 }
+
+
 
 
 @Resolver(User)
@@ -57,23 +71,47 @@ export class UserResolver {
       .posts();
   }
 
+  @ResolveField(() => Profile, { nullable: true })
+  async profile(@Root() user: User): Promise<Profile | null> {
+    // @ts-ignore
+    return this.prismaService.user
+      .findUnique({
+        where: {
+          id: user.id
+        }
+      })
+      .profile();
+    // .profile({ include: { user: true } }); // даже так можно!!!
+  }
+
 
   @Mutation(() => User)
   async signupUser(
     @Args("data") data: UserCreateInput,
     @Context() ctx
   ): Promise<User> {
+
     const postData = data.posts?.map((post) => {
       return { title: post.title, content: post.content || undefined };
     });
 
+    const profileData = data.profile;
+    console.log('profileData',profileData);
+
+    // @ts-ignore
     return this.prismaService.user.create({
       data: {
         email: data.email,
         name: data.name,
         posts: {
           create: postData
+        },
+        profile: {
+          create: profileData
         }
+      },
+      include:{
+        profile: true
       }
     });
   }
@@ -81,7 +119,9 @@ export class UserResolver {
 
   @Query(() => [User], { nullable: true })
   async allUsers(@Context() ctx) {
-    return this.prismaService.user.findMany();
+    return this.prismaService.user.findMany({
+      //include: { profile: true } // так можно!!!
+    });
   }
 
 
@@ -101,6 +141,25 @@ export class UserResolver {
           published: false
         }
       });
+  }
+
+
+  @Mutation(() => User)
+  async updateProfileByUser(
+    @Args("userUniqueInput") userUniqueInput: UserUniqueInput,
+    @Args("profile") profile: ProfileCreateInput
+  ): Promise<User> {
+    return this.prismaService.user.update({
+      where: {
+        id: userUniqueInput.id || undefined,
+        email: userUniqueInput.email || undefined
+      },
+      data: {
+        profile: {
+          update: profile
+        }
+      }
+    });
   }
 
 }
