@@ -13,3 +13,4 @@
 - graphql_11 - Code first - multilevel @ResolveField example (+voyager)
 - graphql_12 - Code first, Prisma
 - graphql_13 - Code first, with MongoDB, JWT Authentication (cookie), validation config and Integration Testing
+- graphql_14 - Code first, TypeORM with MongoDB
