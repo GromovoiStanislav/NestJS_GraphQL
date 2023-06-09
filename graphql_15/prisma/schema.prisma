@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator nestgraphql {
+  provider               = "node node_modules/prisma-nestjs-graphql"
+  output                 = "../src/@generated/prisma-nestjs-graphql"
+  fields_Validator_from  = "class-validator"
+  fields_Validator_input = true
+}
+
+model Donation {
+  id          Int      @id @default(autoincrement())
+  count       Int
+  createdAt   DateTime @default(now())
+  /// @Validator.MinLength(3)
+  displayName String
+  /// @Validator.IsEmail()
+  email       String
+  mobile      String?
+  message     String?
+  team        String?
+}
