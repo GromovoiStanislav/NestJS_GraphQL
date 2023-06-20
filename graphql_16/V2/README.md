@@ -1,6 +1,5 @@
-## NestJS GraphQL Schema first with Prisma, Apollo Sandbox instead of the graphql-playground
+## NestJS GraphQL Schema first with Prisma
 
-- V1 - without @ResolveField()
 - v2 - with @ResolveField()
 
 Prisma:
@@ -64,7 +63,7 @@ query Query {
       name
     }
   }
-
+  
   dogs {
     id
     name
@@ -73,7 +72,7 @@ query Query {
       name
     }
   }
-
+  
   dog(id: 1) {
     id
     name

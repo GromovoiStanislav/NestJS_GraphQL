@@ -16,7 +16,7 @@ npx prisma generate
 http://localhost:3000/graphql
 
 ```
-mutation Mutation {
+mutation CreateOwner {
   createOwner(createOwnerInput: { name: "Tom" }) {
     id
     name
