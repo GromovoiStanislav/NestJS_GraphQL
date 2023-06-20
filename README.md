@@ -15,3 +15,4 @@
 - graphql_13 - Code first, with MongoDB, JWT Authentication (cookie), validation config and Integration Testing
 - graphql_14 - Code first, TypeORM with MongoDB
 - graphql_15 - Schema first with Prisma-nestjs-graphql, Subscription, Apollo Sandbox instead of the graphql-playground
+- graphql_16 - Schema first with Prisma, Apollo Sandbox instead of the graphql-playground
