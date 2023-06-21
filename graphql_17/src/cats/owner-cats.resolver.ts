@@ -1,18 +1,18 @@
 import { Parent, ResolveField, Resolver } from "@nestjs/graphql";
 import { Cat, Owner } from "../graphql.schema";
-import { OwnersService } from "../owners/owners.service";
+import { CatsService } from "./cats.service";
 
 @Resolver("Owner")
 export class OwnerCatsResolver {
 
   constructor(
-    private readonly ownersService: OwnersService
+    private readonly catsService: CatsService
   ) {
   }
 
   @ResolveField()
-  async owner(@Parent() cat: Cat & { ownerId: number }): Promise<Owner> {
-    return this.ownersService.findOneById(cat.ownerId);
+  async cats(@Parent() owner: Owner): Promise<Cat[]> {
+    return this.catsService.findCatsByOwner(owner.id);
   }
 
 }
