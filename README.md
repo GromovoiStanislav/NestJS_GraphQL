@@ -17,3 +17,4 @@
 - graphql_15 - Schema first with Prisma-nestjs-graphql, Subscription, Apollo Sandbox instead of the graphql-playground
 - graphql_16 - Schema first with Prisma, Apollo Sandbox instead of the graphql-playground
 - graphql_17 - Schema first official example
+- graphql_18 - Schema first with Prisma official example

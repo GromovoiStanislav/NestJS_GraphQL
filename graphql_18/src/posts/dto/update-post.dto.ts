@@ -1,12 +1,22 @@
-import { NewPost } from "../../graphql.schema";
-import { IsNotEmpty, IsString } from "class-validator";
+import { UpdatePost } from "../../graphql.schema";
+import { IsBoolean, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
 
-export class CreatePostDto extends NewPost {
+export class UpdatePostDto extends UpdatePost {
   @IsNotEmpty()
   @IsString()
-  title: string;
+  id: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  text: string;
+  @MinLength(3)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(5)
+  text?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isPublished?: boolean;
 }
