@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "38600f65-137b-467c-b3dc-561789606ac0",
+		"name": "graphql-upload",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sayHello",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query sayHello {\r\n  sayHello\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "singleUpload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "apollo-require-preflight",
+						"value": "true",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "operations",
+							"value": "{ \"query\": \"mutation ($file: Upload!) { singleUpload(file: $file) }\", \"variables\": { \"file\": null } }",
+							"type": "default"
+						},
+						{
+							"key": "map",
+							"value": "{ \"0\": [\"variables.file\"] }",
+							"type": "default"
+						},
+						{
+							"key": "0",
+							"type": "file",
+							"src": "/H:/albert.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
