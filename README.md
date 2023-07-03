@@ -19,3 +19,4 @@
 - graphql_17 - Schema first official example
 - graphql_18 - Schema first with Prisma official example
 - graphql_19 - File upload example
+- graphql_20 - File upload example

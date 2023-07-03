@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "38600f65-137b-467c-b3dc-561789606ac0",
+		"name": "graphql-upload",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cats",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "apollo-require-preflight",
+						"value": "true",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "operations",
+							"value": "{ \"query\": \"query { cats { name, breed, image } }\", \"variables\": { } }",
+							"type": "text"
+						},
+						{
+							"key": "map",
+							"value": "{}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "singleUpload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "apollo-require-preflight",
+						"value": "true",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "operations",
+							"value": "{ \"query\": \"mutation ($file: Upload!) { singleUpload(uploadFileInput: { image: $file } ) { image } }\", \"variables\": { \"file\": null } }",
+							"type": "default"
+						},
+						{
+							"key": "map",
+							"value": "{ \"0\": [\"variables.file\"] }",
+							"type": "default"
+						},
+						{
+							"key": "0",
+							"type": "file",
+							"src": "/H:/87592.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCat",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "apollo-require-preflight",
+						"value": "true",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "operations",
+							"value": "{ \"query\": \"mutation ($file: Upload!) { createCat(createCatInput:{name: \\\"Lily\\\", breed: \\\"Persian\\\", image: $file}) { name, breed, image } }\", \"variables\": { \"file\": null } }",
+							"type": "default"
+						},
+						{
+							"key": "map",
+							"value": "{ \"0\": [\"variables.file\"] }",
+							"type": "default"
+						},
+						{
+							"key": "0",
+							"type": "file",
+							"src": "/H:/albert.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
