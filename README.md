@@ -1,22 +1,22 @@
 ## NestJS with GraphQL
 
-- graphql_1 - Code first, TypeORM
-- graphql_2 - Code first, Authentication with Passport
-- graphql_3 - Code first, MongoDB
-- graphql_4 - Schema first demo
-- graphql_5 - Schema first, TypeORM, Observable, Authentication and config
-- graphql_6 - Code first with DataLoader, TypeORM
-- graphql_7 - Code first, TypeORM, Authentication (passport-local, passport-jwt), graphql-request
-- graphql_8 - Code first, MikroORM
-- graphql_9 - Code first with MongoDB and Authentication (cookie)
-- graphql_10 - Code-first with TypeORM - official course
-- graphql_11 - Code first - multilevel @ResolveField example (+voyager)
-- graphql_12 - Code first, Prisma
-- graphql_13 - Code first, with MongoDB, JWT Authentication (cookie), validation config and Integration Testing
-- graphql_14 - Code first, TypeORM with MongoDB
-- graphql_15 - Schema first with Prisma-nestjs-graphql, Subscription, Apollo Sandbox instead of the graphql-playground
-- graphql_16 - Schema first with Prisma, Apollo Sandbox instead of the graphql-playground
-- graphql_17 - Schema first official example
-- graphql_18 - Schema first with Prisma official example
-- graphql_19 - File upload example
-- graphql_20 - File upload example
+- 1 - Code first, TypeORM
+- 2 - Code first, Authentication with Passport
+- 3 - Code first, MongoDB
+- 4 - Schema first demo
+- 5 - Schema first, TypeORM, Observable, Authentication and config
+- 6 - Code first with DataLoader, TypeORM
+- 7 - Code first, TypeORM, Authentication (passport-local, passport-jwt), graphql-request
+- 8 - Code first, MikroORM
+- 9 - Code first with MongoDB and Authentication (cookie)
+- 10 - Code-first with TypeORM - official course
+- 11 - Code first - multilevel @ResolveField example (+voyager)
+- 12 - Code first, Prisma
+- 13 - Code first, with MongoDB, JWT Authentication (cookie), validation config and Integration Testing
+- 14 - Code first, TypeORM with MongoDB
+- 15 - Schema first with Prisma-nestjs-graphql, Subscription, Apollo Sandbox instead of the graphql-playground
+- 16 - Schema first with Prisma, Apollo Sandbox instead of the graphql-playground
+- 17 - Schema first official example
+- 18 - Schema first with Prisma official example
+- 19 - File upload example
+- 20 - File upload example
