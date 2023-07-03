@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "38600f65-137b-467c-b3dc-561789606ac0",
+		"_postman_id": "eaf3a710-cd76-45a7-b463-5abae0c1dfa2",
 		"name": "graphql-upload",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,13 +9,27 @@
 			"name": "sayHello",
 			"request": {
 				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query sayHello {\r\n  sayHello\r\n}",
-						"variables": ""
+				"header": [
+					{
+						"key": "apollo-require-preflight",
+						"value": "true",
+						"type": "default"
 					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "operations",
+							"value": "{ \"query\": \"query { sayHello }\", \"variables\": { } }",
+							"type": "default"
+						},
+						{
+							"key": "map",
+							"value": "{}",
+							"type": "default"
+						}
+					]
 				},
 				"url": {
 					"raw": "http://localhost:3000/graphql",

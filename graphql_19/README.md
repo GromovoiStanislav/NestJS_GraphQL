@@ -10,10 +10,12 @@ npm i graphql-upload@13.0.0
 
 ```
 operations: { "query": "mutation ($file: Upload!) { singleUpload(file: $file) }", "variables": { "file": null } }
-
 map: { "0": ["variables.file"] }
-
 0: // Your file
+
+
+operations: { "query": "query { sayHello }", "variables": { } }
+map: {}
 ```
 
 - and in Headers:
