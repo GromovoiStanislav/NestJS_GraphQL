@@ -3,7 +3,8 @@ type User @key(fields: "id") {
   name: String!
 }
 
-extend type Query {
+#extend type Query {
+type Query {
   getUser(id: ID!): User
   getAllUsers: [User]
 }

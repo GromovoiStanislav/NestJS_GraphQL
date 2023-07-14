@@ -6,12 +6,15 @@ type Post @key(fields: "id") {
   user: User
 }
 
-extend type User @key(fields: "id") {
-  id: ID! @external
+#extend type User @key(fields: "id") {
+type User @key(fields: "id") {
+#  id: ID! @external
+  id: ID!
   posts: [Post]
 }
 
-extend type Query {
+#extend type Query {
+type Query {
   getPosts: [Post]
   findPost(id: ID!): Post
 }

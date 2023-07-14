@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from './models/user.model';
+import { User } from "./users.interfaces";
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
 
