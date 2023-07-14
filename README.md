@@ -21,3 +21,4 @@
 - 19 - File upload example
 - 20 - File upload example
 - 21 - GraphQL Federation - Code First
+- 22 - GraphQL Federation - Schema First
