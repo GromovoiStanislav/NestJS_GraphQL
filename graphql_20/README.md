@@ -1,7 +1,7 @@
 ## NestJs GraphQL upload images
 
 ```
-npm i graphql-upload@13.0.0
+npm i graphql-upload@14
 ```
 
 - Create the 'uploads' folder in the root directory

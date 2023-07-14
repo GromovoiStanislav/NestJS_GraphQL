@@ -20,3 +20,4 @@
 - 18 - Schema first with Prisma official example
 - 19 - File upload example
 - 20 - File upload example
+- 21 - GraphQL Federation - Code First
